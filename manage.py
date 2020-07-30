@@ -24,11 +24,9 @@ def main():
         ) from exc
     
     #equipments = equipments_list()
-    #print(detail())
+    #detail()
     #print(chosen_list())
-    #equipments.equipments_list()
-    
-    
+    equipments.equipments_list()        
     #equipments.ticket_for_equip(728)
     
 

@@ -30,9 +30,9 @@ def detail():
             
     for empresa in enumerate(detail_list, start=1):
         pass
-        #connection_db.cursor.execute("INSERT INTO Companies_Detailed (id, tipo, nome, nome_fantasia, superior, cnpj, observacoes, contato, email, telefone1, ramal1, telefone2, ramal2, fax, cep, rua, numero, complemento, bairro, cidade, estado) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
-        #(empresa[1]['id'], empresa[1]['tipo'], empresa[1]['nome'], empresa[1]['nome_fantasia'], empresa[1]['superior'], empresa[1]['cnpj'], empresa[1]['observacoes'], empresa[1]['contato'], empresa[1]['email'], empresa[1]['telefone1'], empresa[1]['ramal1'], empresa[1]['telefone2'], empresa[1]['ramal2'], empresa[1]['fax'], empresa[1]['cep'], empresa[1]['rua'], empresa[1]['numero'], empresa[1]['complemento'], empresa[1]['bairro'], empresa[1]['cidade'], empresa[1]['estado'],))
-        #connection_db.db.commit()
+        connection_db.cursor.execute("INSERT OR REPLACE INTO Companies_Detailed (id, tipo, nome, nome_fantasia, superior, cnpj, observacoes, contato, email, telefone1, ramal1, telefone2, ramal2, fax, cep, rua, numero, complemento, bairro, cidade, estado) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
+        (empresa[1]['id'], empresa[1]['tipo'], empresa[1]['nome'], empresa[1]['nome_fantasia'], empresa[1]['superior'], empresa[1]['cnpj'], empresa[1]['observacoes'], empresa[1]['contato'], empresa[1]['email'], empresa[1]['telefone1'], empresa[1]['ramal1'], empresa[1]['telefone2'], empresa[1]['ramal2'], empresa[1]['fax'], empresa[1]['cep'], empresa[1]['rua'], empresa[1]['numero'], empresa[1]['complemento'], empresa[1]['bairro'], empresa[1]['cidade'], empresa[1]['estado'],))
+        connection_db.db.commit()
     return detail_list
 
 

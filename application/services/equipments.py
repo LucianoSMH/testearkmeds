@@ -15,8 +15,6 @@ def equipments_list():
     conn, headers = make_connection()
     detail_list = detail()
     results_tratados = []
-
-    #company_id = 0
     for company in detail_list:
         if company["tipo"] != 5:
             company_id = company["id"]
@@ -32,19 +30,18 @@ def equipments_list():
                 equipment.pop("tipo_contrato")
                 equipment.pop("contratante")
                 results_tratados.append(equipment)
-    # for equip in enumerate(results_tratados, start=1):
 
     for equip in enumerate(results_tratados, start=1):
         ticket_counts = (get_equip_tickets(
             equip[1]['id'], equip[1]['tipo']['descricao']))
-        # db_cursor.execute("INSERT INTO Equipment_Details (id, fabricante, modelo, patrimonio, numero_serie, id_proprietario, nome_proprietario, apelido_proprietario, id_tipo, descricao_tipo, quantidade_tickets) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        #                  (equip[1]['id'], equip[1]['fabricante'], equip[1]['modelo'],  equip[1]['patrimonio'], equip[1]['numero_serie'], equip[1]['proprietario']['id'], equip[1]['proprietario']['nome'], equip[1]['proprietario']['apelido'], equip[1]['tipo']['id'], equip[1]['tipo']['descricao'],ticket_counts,))
-        # connection_db.db.commit()
+        db_cursor.execute("INSERT OR REPLACE INTO Equipment_Details (id, fabricante, modelo, patrimonio, numero_serie, id_proprietario, nome_proprietario, apelido_proprietario, id_tipo, descricao_tipo, quantidade_tickets) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+               (equip[1]['id'], equip[1]['fabricante'], equip[1]['modelo'],  equip[1]['patrimonio'], equip[1]['numero_serie'], equip[1]['proprietario']['id'], equip[1]['proprietario']['nome'], equip[1]['proprietario']['apelido'], equip[1]['tipo']['id'], equip[1]['tipo']['descricao'], ticket_counts,))
+    connection_db.db.commit()
 
     for ticks in enumerate(tickets_by_equip, start=1):
-        db_cursor.execute("INSERT INTO Equipment_Tickets (id_ticket, numero_ticket, prop_ticket, equipamento_ticket) values (?, ?, ?, ?)",
-                          (ticks[1]['id'], ticks[1]['numero'], ticks[1]['solicitante'], ticks[1]['equip_nome'],))
-        connection_db.db.commit()
+        db_cursor.execute("INSERT OR REPLACE INTO Equipment_Tickets (id_ticket, numero_ticket, prop_ticket, equipamento_ticket) values (?, ?, ?, ?)",
+                (ticks[1]['id'], ticks[1]['numero'], ticks[1]['solicitante'], ticks[1]['equip_nome'],))
+    connection_db.db.commit()
 
     connection_db.db.close()
 
@@ -66,5 +63,5 @@ def get_equip_tickets(equip_id, equip_nome):
             'equip_nome': equip_nome
         })
         ticket_counts = len(teste)
-    
+
     return ticket_counts

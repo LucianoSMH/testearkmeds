@@ -1,0 +1,4 @@
+.vscode
+Lib
+db.sqlite3
+pyvenv.cfg
