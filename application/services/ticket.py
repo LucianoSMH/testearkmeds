@@ -11,17 +11,13 @@ db_cursor.execute("SELECT * from Equipment_Details")
 records = db_cursor.fetchall()
 millis = int(round(time.time() * 1000))
 
-#print("Total rows ", db_cursor.rowcount)
-
 def make_ticket(id_equipamento, id_solicitante, tipo_servico, problema, observacoes, data_criacao, id_tipo_ordem_servico):
-    conn, headers = make_connection()    
-    #conn = http.client.HTTPSConnection("desenvolvimento.arkmeds.com")
+    conn, headers = make_connection()        
     chamadoteste = {'equipamento': id_equipamento, 'solicitante': id_solicitante, 'tipo_servico': tipo_servico, 'problema': problema, 'observacoes': observacoes, 'data_criacao': data_criacao, 'id_tipo_ordem_servico': id_tipo_ordem_servico}
     payload = json.dumps(chamadoteste)
     conn.request("POST", "/api/v1/chamado/novo/", payload, headers)
     res = conn.getresponse()
-    data = res.read()
-    #print(data.decode("utf-8"))
+    data = res.read()    
     return chamadoteste
 
 def send_ticket():
@@ -31,4 +27,4 @@ def send_ticket():
 
 
        
-#print(make_ticket(1, 1, 1, "teste", "tete", 1111111, 1))
+

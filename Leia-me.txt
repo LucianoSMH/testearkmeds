@@ -1,0 +1,34 @@
+Primeiramente, muito obrigado pela oportunidade. Eu sabia que seria um teste praticamente impossível mas isso não me segurou. 
+Infelizmente eu não consegui terminar o teste inteiro porque foram coisas complexas demais para aprender em uma semana, mas tentei o melhor que eu pude de acordo com as minhas circunstâncias atuais. 
+
+O que está funcionando são todos os POSTS e GETS da API, eu consegui também puxar tudo e adicionar em um banco de dados em tabelas separadas por empresas detalhadas, equipamentos com o número de chamados e cada chamado que os equipamentos
+das empresas utilizadas possuem no momento. Também está funcionando o POST de criar chamados, puxando todos os dados da API, como foi pedido. Nenhum dado foi inserido a mão ou coisa do tipo, todas as funções
+fazem os GETs e POSTS automatizados e jogam direto pro banco de dados. As listas também foram tratadas para excluir os dados desnecessários e incluir apenas os que foram requisitados no teste. Eu deixei os bancos de dados vazios
+para que vocês mesmos possam conferir a entrada e filtrada dos dados. Demora um pouco para executar, porque eu tive que tratar 3 listas diferentes e pegar os dados de dentro dos índices específicos, o que resultou em "alguns" for,
+que eu acho que justifica a demora para a criação das tabelas. Eu tentei procurar por um jeito de otimizar essa parte, mas como tinha que tratar muita lista separando o que era necessário e o que não era, com o conhecimento em python
+que eu tenho no momento (que agora já não é mais zero, é 1) eu não encontrei uma maneira de otimizar, então peço desculpas pela demora na hora de inserir os dados. 
+
+O arquivo principal que contém o (main) é o manage.py. Dentro da pasta application, existem duas pastas: a model, que é aonde o banco de dado (companies.db) fica armazenado, e a services, que contém todas as classes/funções que eu utilizei.
+Tudo é relacionado utilizando FROM e IMPORT de uma classe pra outra. Por exemplo, ao invés de inserir o código de autenticação com usuário e senha e usando a token em todas as funções, Eu fiz todas as autenticações no 
+auth.py e as outras classes só importam ela e usam a função (make_connection()) que já retornam o conn e o headers. Então todas as outras funções apenas puxam a token já jerada no auth.py em apenas uma linha, deixando o código mais limpo.
+
+company.py é aonde a lista de empresas é gerenciada. A função (chosen_list()) recebe a lista completa das empresas usando o "GET Listar Empresas". Depois, a função (detail()) utiliza essa primeira lista, escolhe 20 empresas pelo indices_to_access
+e cria uma lista com todos os detalhes das empresas escolhidas e utilizando um enumerate, adiciona todos os valores no banco de dados na coluna "Companiies_Detailed".
+
+equipments.py é aonde a lista de equipamentos é gerenciada. A função (equipments_lists()) utiliza os dados da lista detalhada das empresas da classe company.py, cria uma lista chamada chamada (results_tratados) que exclui os dados desnecessários
+a serem inseridos no banco de dados. Depois, utilizando enumerate, ela pega cada equipamento da (results_tratados) e primeiro checa quantos chamados cada equipamento possui, e depois insere todos os equipamentos
+das empresas escolhidas na tabela "Equipment_Details", com todos os dados que foram pedidos no teste. Por último, a função (get_equip_tickets() utiliza os mesmos dados dos equipamentos e busca por todos os chamados que cada um possui, e os insere
+na tabela "Equipment_Tickets", com todos os dados que foram pedidos no teste também.
+
+Pra fazer tudo isso funcionar, é só executar o manage.py que já tem no main as duas únicas funções necessárias para que toda essa mágica aconteça. 
+
+Infelizmente eu não tive tempo de aprender a relacionar as tabelas e aprender o Django direitinho para exibir em Web, e podem ter certeza que isso me deixou extremamente chateado, porque eu realmente queria terminar a tarefa inteira.
+Mas torço para que vocês possam perceber o potencial que eu tenho na área e para aprender, porque como vocês mesmo sabem, essa foi a primeira vez que eu mexi com python, API e banco de dados.
+
+Mais uma vez, muito obrigado por essa oportunidade única e por acreditarem em mim ao ponto de me darem essa chance. Muito obrigado, do fundo do meu coração. 
+
+
+
+
+
+ 
